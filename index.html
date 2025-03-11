@@ -2,12 +2,35 @@
 <html>
   <head>
     <title>Engine sound example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+      body {
+        margin: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 30px;
+      }
+      input[type="button"] {
+        margin: 5px;
+      }
+    </style>
   </head>
   <body>
-    <h2>Car Engine</h2>
-    <p>Press start and hold <strong>Up</strong> button to accelerate, release for develerate.</p>
-    <input type="button" id="start" value="Start" />
-    <input type="button" id="stop" value="Stop" />
+    <div class="container">
+      <h2>Car Engine</h2>
+      <p>Press start and hold <strong>Up</strong> button to accelerate, release for develerate.</p>
+      <input type="button" class="button-primary" id="start" value="Start" />
+      <input type="button" id="stop" value="Stop" />
+    </div>
     <script src="./main.js"></script>
   </body>
 </html>
