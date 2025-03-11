@@ -1,10 +1,11 @@
 window.onload = function () {
-  const start = document.getElementById('start');
-  const stop = document.getElementById('stop');
+  const start_btn = document.getElementById('start');
+  const stop_btn = document.getElementById('stop');
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const xhr = new XMLHttpRequest();
   const pitch = { step: 0, min: 1.1, max: 2.2 };
   const pitchStep = 0.02;
+  const updateInterval = 50; // ms
 
   let source;
   let intervalId;
@@ -21,8 +22,8 @@ window.onload = function () {
     window.addEventListener('keydown', createPitchStep(pitchStep));
     window.addEventListener('keyup', createPitchStep(-pitchStep));
 
-    start.addEventListener('click', startEngine);
-    stop.addEventListener('click', stopEngine);
+    start_btn.addEventListener('click', startEngine);
+    stop_btn.addEventListener('click', stopEngine);
 
     function startEngine() {
       if (!source) {
@@ -34,7 +35,7 @@ window.onload = function () {
           source.start();
         });
 
-        intervalId = setInterval(updatePitch, 50);
+        intervalId = setInterval(updatePitch, updateInterval);
       }
     }
 
