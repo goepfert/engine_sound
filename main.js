@@ -1,11 +1,13 @@
 window.onload = function () {
-  var start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)(),
-    xhr = new XMLHttpRequest(),
-    pitch = { step: 0, min: 1.1, max: 2.2 },
-    source,
-    intervalId;
+  const start = document.getElementById('start');
+  const stop = document.getElementById('stop');
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const xhr = new XMLHttpRequest();
+  const pitch = { step: 0, min: 1.1, max: 2.2 };
+  const pitchStep = 0.02;
+
+  let source;
+  let intervalId;
 
   function createPitchStep(n) {
     return function (e) {
@@ -18,10 +20,10 @@ window.onload = function () {
   xhr.open('GET', './engine.wav', true);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function (e) {
-    var audioData = this.response;
+    let audioData = this.response;
 
-    window.addEventListener('keydown', createPitchStep(0.02));
-    window.addEventListener('keyup', createPitchStep(-0.02));
+    window.addEventListener('keydown', createPitchStep(pitchStep));
+    window.addEventListener('keyup', createPitchStep(-1 * pitchStep));
 
     start.addEventListener('click', function (e) {
       if (!source) {
@@ -35,7 +37,7 @@ window.onload = function () {
         });
 
         intervalId = setInterval(function () {
-          var currPitch = source.playbackRate.value;
+          let currPitch = source.playbackRate.value;
 
           if ((pitch.step < 0 && currPitch > pitch.min) || (pitch.step > 0 && currPitch < pitch.max)) {
             source.playbackRate.value += pitch.step;
